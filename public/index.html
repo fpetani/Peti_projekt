@@ -23,7 +23,9 @@
             </ul>
           </nav>
     </header>
+    <div class="jumbotron">
     <h1>Peti projekt iz weba2</h1>
+    </div>
     <script>
         //Make sure sw are supported
         if('serviceWorker' in navigator){
@@ -35,12 +37,6 @@
                 .catch(err => console.log('Service worker '+err))
             })
         }
-    </script>
-    <script>
-        window.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault();
-        event.prompt();
-        });
     </script>
 </body>
 </html>
