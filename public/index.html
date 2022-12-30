@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=y, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Peti projekt iz weba2</h1>
+    <script>
+        //Make sure sw are supported
+        if('serviceWorker' in navigator){
+            console.log('Service worker supported')
+            window.addEventListener('load', ()=>{
+                navigator.serviceWorker
+                .register('./sw.js')
+                .then(reg => console.log('service worker registered'))
+                .catch(err => console.log('Service worker '+err))
+            })
+        }
+    </script>
+</body>
+</html>
