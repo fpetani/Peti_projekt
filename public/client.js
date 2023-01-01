@@ -32,6 +32,25 @@ async function send() {
   console.log("Push Sent...");
 }
 
+let btnNotif = document.getElementById("btnEnableNotifications");
+
+if ("Notification" in window && "serviceWorker" in navigator) {
+    btnNotif.addEventListener("click", function () {
+        Notification.requestPermission(async function (res) {
+            console.log("Request permission result:", res);
+            if (res === "granted") {
+                await setupPushSubscription();
+            } else {
+                console.log("User denied push notifs:", res);
+            }
+        });
+    });
+} else {
+    btnNotif.setAttribute("disabled", "");
+    btnNotif.classList.add("btn-outline-danger");
+}
+
+
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
