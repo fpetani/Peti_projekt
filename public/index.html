@@ -8,7 +8,10 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-    body { padding-top:20px; }
+    body { padding-top:20px; 
+        background-color: #E6E6FA;
+        color: #0b0b0b;
+    }
     </style>
 </head>
 
@@ -26,6 +29,12 @@
     <div class="jumbotron">
     <h1>Peti projekt iz weba2</h1>
     </div>
+    <div class="text-end">
+        <button id="btnEnableNotifications" class="btn btn-outline-success">
+            <i class="bi bi-bell">Omogući notifikacije</i>
+        </button>
+    </div>
+
     <script>
         //Make sure sw are supported
         if('serviceWorker' in navigator){

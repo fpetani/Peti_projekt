@@ -40,13 +40,37 @@ self.addEventListener('activate', (e)=>{
 }) 
 
 //Call fetch event
-self.addEventListener('fetch', e=>{
-    console.log('Service worker: Fetching')
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+      // Try to get the response from the cache
+      caches.match(event.request).then(function(response) {
+        // If the response is found in the cache, return it
+        
+        if (response) {
+          return response;
+        }
+  
+        // Otherwise, fetch the resource from the network and add it to the cache
+        return fetch(event.request).then(function(response) {
+          caches.open(cacheName).then(function(cache) {
+            cache.put(event.request, response.clone());
+          });
+          return response;
+        });
+      })
+    );
+  });
 
-    e.respondWith(
-        fetch(e.request).catch(()=> caches.match(e.request))
-    )
-})
+  self.addEventListener("push", e => {
+    const data = e.data.json();
+    console.log("Push Recieved...");
+    self.registration.showNotification(data.title, {
+      body: "Notified by Peti projekt!",
+      icon: "images/image.png"
+    });
+  });
+  
+  
 
  
 
