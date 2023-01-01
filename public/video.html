@@ -47,9 +47,6 @@
                 height: { min: 480, ideal: 720, max: 1080 } 
             } 
         }; 
-        // width: 1280, height: 720  -- preference only
-        // facingMode: {exact: "user"}
-        // facingMode: "environment"
         
         //handle older browsers that might implement getUserMedia in some way
         if (navigator.mediaDevices === undefined) {
@@ -120,18 +117,7 @@
         .catch(function(err) { 
             console.log(err.name, err.message); 
         });
-        
-        /*********************************
-        getUserMedia returns a Promise
-        resolve - returns a MediaStream Object
-        reject returns one of the following errors
-        AbortError - generic unknown cause
-        NotAllowedError (SecurityError) - user rejected permissions
-        NotFoundError - missing media track
-        NotReadableError - user permissions given but hardware/OS error
-        OverconstrainedError - constraint video settings preventing
-        TypeError - audio: false, video: false
-        *********************************/
+    
     </script>
 </body>
 </html>

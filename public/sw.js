@@ -2,7 +2,8 @@ const cacheName = 'v1'
 
 const cacheAssets = [
     'index.html',
-    'video.html'
+    'video.html',
+    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css'
 ]
 
 //call install event
@@ -40,24 +41,18 @@ self.addEventListener('activate', (e)=>{
 }) 
 
 //Call fetch event
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', event => {
     event.respondWith(
-      // Try to get the response from the cache
-      caches.match(event.request).then(function(response) {
-        // If the response is found in the cache, return it
-        
-        if (response) {
-          return response;
-        }
-  
-        // Otherwise, fetch the resource from the network and add it to the cache
-        return fetch(event.request).then(function(response) {
-          caches.open(cacheName).then(function(cache) {
-            cache.put(event.request, response.clone());
-          });
-          return response;
+     fetch(event.request).then(res => {
+        const resClone = res.clone();
+
+        caches.open(cacheName)
+        .then(cache => {
+            cache.put(event.request, resClone);
         });
-      })
+
+        return res;
+     }).catch(err => caches.match(event.request).then(res => res))
     );
   });
 
@@ -69,6 +64,9 @@ self.addEventListener('fetch', function(event) {
       icon: "images/image.png"
     });
   });
+
+  
+  
   
   
 
